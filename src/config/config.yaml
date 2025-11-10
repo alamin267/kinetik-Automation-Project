@@ -3,8 +3,10 @@ qa:
   base_url: "http://automationexercise.com"
   browser: "chromium"
   headless: false
+  timeout: 10000
 
 staging:
   base_url: "https://staging.automationexercise.com"
   browser: "chromium"
   headless: true
+  timeout: 12000

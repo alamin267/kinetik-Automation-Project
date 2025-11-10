@@ -21,19 +21,31 @@ def config(pytestconfig):
     env = pytestconfig.getoption("--env") or "qa"
     return load_config(env)
 
-
 # ---------------- CLI OPTIONS ----------------
-def pytest_addoption(parser):
-    """Add CLI options for environment and browser."""
-    parser.addoption("--env", action="store", default="qa", help="Environment: qa / staging / prod")
-    parser.addoption("--browser", action="store", default=None, help="Browser: chromium / firefox / webkit")
 
+
+def pytest_addoption(parser):
+    """Add CLI options for environment and browser safely."""
+    parser.addoption(
+        "--env",
+        action="store",
+        default="qa",
+        help="Environment: qa / staging / prod"
+    )
+    parser.addoption(
+        "--mybrowser",  # unique name to avoid conflicts
+        action="store",
+        default=None,
+        help="Browser: chromium / firefox / webkit"
+    )
 
 # ---------------- PLAYWRIGHT FIXTURES ----------------
+
+
 @pytest.fixture(scope="session")
 def browser(config, pytestconfig):
     """Launch browser session based on config or CLI override."""
-    browser_name = pytestconfig.getoption("--browser") or config["browser"]
+    browser_name = pytestconfig.getoption("--mybrowser") or config["browser"]
     with sync_playwright() as p:
         browser_type = getattr(p, browser_name)  # chromium / firefox / webkit
         browser = browser_type.launch(
@@ -49,11 +61,16 @@ def page(browser, config):
     """Create a new isolated browser context for each test."""
     context = browser.new_context(base_url=config["base_url"], viewport=None)
     page = context.new_page()
+
+    # 🔹 Global timeout settings
+    page.set_default_timeout(10000)        # Element operations
+    page.set_default_navigation_timeout(15000)  # Page navigations
     yield page
     context.close()
 
-
 # ---------------- ALLURE REPORTING ----------------
+
+
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item):
     """Attach screenshot to Allure report on test failure."""
