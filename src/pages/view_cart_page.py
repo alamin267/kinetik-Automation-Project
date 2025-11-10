@@ -1,5 +1,4 @@
-import time
-import re
+from helpers.wait_utils import WaitHelper
 from playwright.sync_api import expect
 
 
@@ -7,24 +6,26 @@ class ViewCartPage:
 
     def __init__(self, page, config):
         self.page = page
+        self.wait = WaitHelper(page)  # Initialize the helper
         self.base_url = config["base_url"]
 
-        #Locators
-        self.cart_page_url = "https://automationexercise.com/view_cart"
-        self.check_quantity = page.locator("//td[@class='cart_quantity']/button")
+        # Locators
+        self.cart_page_url = "/view_cart"
+        self.check_quantity = "//td[@class='cart_quantity']/button"
 
     def check_view_cart_page_and_product_quantity(self, product_quantity):
-        time.sleep(5)
-        assert "/view_cart" in self.page.url, "User is not navigated to View Cart page"
-        print("Product displayed view cart page")
+        # Wait until the URL contains '/view_cart'
+        self.wait.wait_for_url_contains(self.cart_page_url)
 
-        quantity = self.check_quantity.inner_text()
-        if quantity == product_quantity:
-            print("Quantity match is the view cart page")
+        print("✅ User is on the View Cart page")
+
+        # Wait until the quantity button is visible
+        self.wait.wait_for_element_visible(self.check_quantity)
+
+        # Check quantity
+        quantity_text = self.page.locator(self.check_quantity).inner_text().strip()
+        if quantity_text == product_quantity:
+            print(f"✅ Quantity matches on View Cart page: {quantity_text}")
         else:
-            print("Quantity doesn't match is the view cart page")
+            print(f"❌ Quantity does NOT match on View Cart page. Expected: {product_quantity}, Found: {quantity_text}")
             return
-
-
-
-

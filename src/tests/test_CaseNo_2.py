@@ -7,6 +7,7 @@ from utils.data_loader import load_test_data
 
 
 def test_case_no_2(page, config):
+
     data = load_test_data("products.json")
     quantity = data["product_quantity"]
     home_page = HomePage(page, config)
