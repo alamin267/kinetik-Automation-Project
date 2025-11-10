@@ -6,12 +6,12 @@ from pages.view_cart_page import ViewCartPage
 from utils.data_loader import load_test_data
 
 
-def test_case_no_2(page):
+def test_case_no_2(page, config):
     data = load_test_data("products.json")
     quantity = data["product_quantity"]
-    home_page = HomePage(page)
-    product_detail_page = ProductDetailPage(page)
-    view_cart_page = ViewCartPage(page)
+    home_page = HomePage(page, config)
+    product_detail_page = ProductDetailPage(page, config)
+    view_cart_page = ViewCartPage(page, config)
 
     home_page.visit_home_page()
     home_page.is_homePage_visible()

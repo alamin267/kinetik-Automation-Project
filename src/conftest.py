@@ -4,8 +4,9 @@ import allure
 import os
 import yaml
 
-
 # ---------------- CONFIGURATION LOADER ----------------
+
+
 def load_config(env="qa"):
     """Load environment settings from YAML config file."""
     config_path = os.path.join(os.path.dirname(__file__), "config", "config.yaml")
@@ -21,12 +22,20 @@ def config(pytestconfig):
     return load_config(env)
 
 
+# ---------------- CLI OPTIONS ----------------
+def pytest_addoption(parser):
+    """Add CLI options for environment and browser."""
+    parser.addoption("--env", action="store", default="qa", help="Environment: qa / staging / prod")
+    parser.addoption("--browser", action="store", default=None, help="Browser: chromium / firefox / webkit")
+
+
 # ---------------- PLAYWRIGHT FIXTURES ----------------
 @pytest.fixture(scope="session")
-def browser(config):
-    """Launch browser session based on config settings."""
+def browser(config, pytestconfig):
+    """Launch browser session based on config or CLI override."""
+    browser_name = pytestconfig.getoption("--browser") or config["browser"]
     with sync_playwright() as p:
-        browser_type = getattr(p, config["browser"])  # chromium / firefox / webkit
+        browser_type = getattr(p, browser_name)  # chromium / firefox / webkit
         browser = browser_type.launch(
             headless=config["headless"],
             args=["--window-size=1920,1080"]
@@ -50,23 +59,15 @@ def pytest_runtest_makereport(item):
     """Attach screenshot to Allure report on test failure."""
     outcome = yield
     report = outcome.get_result()
-
     if report.when == "call" and report.failed:
         page = item.funcargs.get("page", None)
         if page:
             screenshot_dir = "reports/screenshots"
             os.makedirs(screenshot_dir, exist_ok=True)
             screenshot_path = os.path.join(screenshot_dir, f"{item.name}.png")
-
             page.screenshot(path=screenshot_path)
             allure.attach.file(
                 screenshot_path,
                 name=f"Screenshot - {item.name}",
                 attachment_type=allure.attachment_type.PNG
             )
-
-
-# ---------------- CLI OPTIONS ----------------
-def pytest_addoption(parser):
-    """Allow selecting environment via CLI."""
-    parser.addoption("--env", action="store", default="qa", help="Environment: qa / staging / prod")

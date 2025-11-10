@@ -1,0 +1,9 @@
+
+Home page visible
+View Product button is clicked
+Product Details is opened
+Product Quantity increased
+Add to cart button is clicked
+View cart button is clicked
+Product displayed view cart page
+Quantity match is the view cart page

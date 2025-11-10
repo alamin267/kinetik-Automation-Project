@@ -1,0 +1,9 @@
+
+Home page visible
+
+Home page visible
+Click on the product button
+Navigate to all product page successfully
+Enter Product Name in the search field and click on the search button
+Search Item is visible
+Search Related All product is Visible, Last Product is: 14: 'Lace Top For Women'

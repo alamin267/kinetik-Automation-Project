@@ -6,15 +6,14 @@ from pages.product_page import ProductsPage
 from utils.data_loader import load_test_data
 
 
-def test_home_page(page):
+def test_home_page(page, config):
     data = load_test_data("products.json")
     search_term = data["search_product"]
 
-    home_page = HomePage(page)
-    product_page = ProductsPage(page)
+    home_page = HomePage(page, config)
+    product_page = ProductsPage(page, config)
 
     home_page.visit_home_page()
-    home_page.is_homePage_visible()
     home_page.is_homePage_visible()
     home_page.click_product_button()
     product_page.check_is_user_navigate_to_all_products_page()

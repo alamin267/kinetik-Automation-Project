@@ -5,9 +5,10 @@ from playwright.sync_api import expect
 
 class HomePage:
 
-    def __init__(self, page):
+    def __init__(self, page, config):
         self.page = page
-        self.url = "https://automationexercise.com/"
+        self.base_url = config["base_url"]
+
 
         # Locators
         self.home_page_logo = page.locator("//img[@alt='Website for automation practice']")
@@ -15,7 +16,7 @@ class HomePage:
         self.view_product_button = page.locator("a[href='/product_details/1']")
 
     def visit_home_page(self):
-        self.page.goto(self.url, timeout=60000)
+        self.page.goto(self.base_url, timeout=60000)
         self.page.set_viewport_size({"width": 1920, "height": 1080})
         time.sleep(1)
 

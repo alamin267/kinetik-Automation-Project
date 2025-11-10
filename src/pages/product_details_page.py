@@ -4,9 +4,9 @@ import re
 
 class ProductDetailPage:
 
-    def __init__(self, page):
+    def __init__(self, page, config):
         self.page = page
-        self.url="https://automationexercise.com/"
+        self.base_url = config["base_url"]
 
        #Locators
         self.write_your_review_text = page.locator("//a[normalize-space()='Write Your Review']")

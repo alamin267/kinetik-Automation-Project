@@ -5,9 +5,9 @@ from playwright.sync_api import expect
 
 class ProductsPage:
 
-    def __init__(self, page):
+    def __init__(self, page, config):
         self.page = page
-        self.url="https://automationexercise.com/"
+        self.base_url = config["base_url"]
 
         self.product_button = page.locator("//a[@href='/products']")
         self.search_button_input_field = page.locator("//input[@id='search_product']")

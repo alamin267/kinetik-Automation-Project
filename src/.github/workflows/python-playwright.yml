@@ -1,0 +1,57 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.11]
+        browser: [chromium, firefox, webkit]
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest-playwright allure-pytest
+          pytest-playwright install
+
+      # Step 4: Run tests in parallel for this browser
+      - name: Run Tests
+        shell: bash
+        env:
+          BROWSER: ${{ matrix.browser }}
+        run: |
+          echo "Running tests on browser: $BROWSER"
+          pytest -n auto --env qa --browser $BROWSER --alluredir=reports/allure-results
+
+      # Step 5: Generate Allure HTML report
+      - name: Generate Allure Report
+        shell: bash
+        run: |
+          allure generate reports/allure-results --clean -o reports/allure-report
+
+      # Step 6: Upload Allure report as artifact
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report-${{ matrix.browser }}
+          path: reports/allure-report

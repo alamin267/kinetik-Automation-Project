@@ -1,0 +1,10 @@
+
+qa:
+  base_url: "http://automationexercise.com"
+  browser: "chromium"
+  headless: false
+
+staging:
+  base_url: "https://staging.automationexercise.com"
+  browser: "chromium"
+  headless: true
