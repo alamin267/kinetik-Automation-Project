@@ -2,6 +2,7 @@ import time
 import re
 from playwright.sync_api import expect
 
+
 class ViewCartPage:
 
     def __init__(self, page):
@@ -12,7 +13,6 @@ class ViewCartPage:
         self.cart_page_url = "https://automationexercise.com/view_cart"
         #self.page.wait_for_selector("//button[normalize-space()='4']", timeout=20000)
         self.check_quantity = page.locator("//td[@class='cart_quantity']/button")
-
 
     def check_view_cart_page_and_product_quantity(self, product_quantity):
         time.sleep(5)

@@ -3,8 +3,12 @@ from urllib.parse import quote
 from pages.home_page import HomePage
 from pages.product_details_page import ProductDetailPage
 from pages.view_cart_page import ViewCartPage
+from utils.data_loader import load_test_data
+
 
 def test_case_no_2(page):
+    data = load_test_data("products.json")
+    quantity = data["product_quantity"]
     home_page = HomePage(page)
     product_detail_page = ProductDetailPage(page)
     view_cart_page = ViewCartPage(page)
@@ -16,7 +20,7 @@ def test_case_no_2(page):
     product_detail_page.increase_product_quantity()
     product_detail_page.addToCart_button_click()
     product_detail_page.view_cart_button_click()
-    view_cart_page.check_view_cart_page_and_product_quantity("4")
+    view_cart_page.check_view_cart_page_and_product_quantity(quantity)
 
 
 

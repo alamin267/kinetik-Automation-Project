@@ -14,8 +14,6 @@ class ProductDetailPage:
         self.add_to_cart_button = page.locator("//button[normalize-space()='Add to cart']")
         self.view_cart_button = page.locator("//u[normalize-space()='View Cart']")
 
-
-
     def is_product_detail_visible(self):
         if self.write_your_review_text.is_visible():
             print("Product Details is opened")

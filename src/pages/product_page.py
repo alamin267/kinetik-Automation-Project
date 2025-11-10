@@ -2,6 +2,7 @@ import time
 import re
 from playwright.sync_api import expect
 
+
 class ProductsPage:
 
     def __init__(self, page):
@@ -12,7 +13,6 @@ class ProductsPage:
         self.search_button_input_field = page.locator("//input[@id='search_product']")
         self.search_button_icon = page.locator("//button[@id='submit_search']")
         self.products = page.locator("//div[@class='productinfo text-center']")
-
 
     def check_is_user_navigate_to_all_products_page(self):
         assert "/products" in self.page.url, "User is not navigated to All Products page"
@@ -32,8 +32,6 @@ class ProductsPage:
         else:
             print("Search Item is visible")
             return
-
-
 
     def all_the_search_related_product_are_visible(self):
         count = self.products.count()
