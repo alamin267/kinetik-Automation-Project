@@ -107,7 +107,6 @@ This README covers:
 - Test parameterization  
 
 ---
-
 If you want, I can also **add badges** at the top for **GitHub Actions CI status** and **Allure report link** to make it look more professional.  
 
 Do you want me to add badges too?
