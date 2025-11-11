@@ -1,12 +1,18 @@
 import time
 from urllib.parse import quote
+
+import pytest
 from pages.home_page import HomePage
 from pages.product_details_page import ProductDetailPage
 from pages.view_cart_page import ViewCartPage
 from utils.data_loader import load_test_data
 
+data = load_test_data("products.json")
+quantity = data["product_quantity"]
 
-def test_case_no_2(page, config):
+
+@pytest.mark.parametrize("product_quantity", quantity)
+def test_case_no_2(page, config, product_quantity):
 
     data = load_test_data("products.json")
     quantity = data["product_quantity"]
@@ -21,7 +27,7 @@ def test_case_no_2(page, config):
     product_detail_page.increase_product_quantity()
     product_detail_page.addToCart_button_click()
     product_detail_page.view_cart_button_click()
-    view_cart_page.check_view_cart_page_and_product_quantity(quantity)
+    view_cart_page.check_view_cart_page_and_product_quantity(product_quantity)
 
 
 

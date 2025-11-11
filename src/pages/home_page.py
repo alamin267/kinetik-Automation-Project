@@ -15,14 +15,14 @@ class HomePage:
         self.view_product_button = "a[href='/product_details/1']"
 
     def visit_home_page(self):
-        self.page.goto(self.base_url, timeout=60000)
-        self.page.set_viewport_size({"width": 1920, "height": 1080})
+        self.page.goto(self.base_url)
+        self.page.set_viewport_size({"width": 1900, "height": 1080})
         self.wait.wait_for_page_load()
         self.wait.wait_for_element_visible(self.home_page_logo)
 
     def is_homePage_visible(self):
         if self.page.locator(self.home_page_logo).is_visible():
-            print("Home page visible")
+            print("\nHome page visible")
         else:
             print("Home page NOT visible")
 

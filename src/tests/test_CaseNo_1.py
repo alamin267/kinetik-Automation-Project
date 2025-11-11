@@ -1,15 +1,15 @@
-import time
-from urllib.parse import quote
-
+import pytest
 from pages.home_page import HomePage
 from pages.product_page import ProductsPage
 from utils.data_loader import load_test_data
 
 
-def test_home_page(page, config):
-    data = load_test_data("products.json")
-    search_term = data["search_product"]
+data = load_test_data("products.json")
+search_data = data["search_product"]
 
+
+@pytest.mark.parametrize("search_term", search_data)
+def test_case_no_1(page, config, search_term):
     home_page = HomePage(page, config)
     product_page = ProductsPage(page, config)
 

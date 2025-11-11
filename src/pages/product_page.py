@@ -1,5 +1,7 @@
 from helpers.wait_utils import WaitHelper
 from playwright.sync_api import expect
+import playwright
+
 
 class ProductsPage:
 
@@ -12,6 +14,7 @@ class ProductsPage:
         self.search_button_input_field = "//input[@id='search_product']"
         self.search_button_icon = "//button[@id='submit_search']"
         self.products = "//div[@class='productinfo text-center']"
+        self.view_product_button = "a[href='/product_details/1']"
 
     def check_is_user_navigate_to_all_products_page(self):
         self.wait.wait_for_url_contains("/products")
@@ -38,3 +41,10 @@ class ProductsPage:
         for i in range(count):
             expect(self.page.locator(self.products).nth(i)).to_be_visible()
         print(f"All search-related products are visible (Total: {count})")
+
+
+
+
+
+
+
