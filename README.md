@@ -1,19 +1,6 @@
-kinetik-Automation-Project/
-│
-├─ src/
-│ ├─ pages/ # Page Object Models
-│ ├─ helpers/ # Helper classes (WaitHelper, etc.)
-│ ├─ utils/ # Utilities like data loaders
-│ ├─ tests/ # Test scripts
-│ └─ pytest.ini # Pytest configuration
-│
-├─ .github/workflows/ # GitHub Actions CI/CD workflow
-│ └─ python-playwright.yml
-│
-├─ requirements.txt # Python dependencies
-├─ products.json # Test data
-└─ README.md # Project documentation
+# Kinetik Automation Project
 
+Automation framework using **Playwright** and **Python** for web application testing. Supports cross-browser testing, parallel execution, test parameterization, generates **Allure reports** and many more.
 
 ---
 
@@ -34,6 +21,7 @@ kinetik-Automation-Project/
 1. **Clone the repo:**
 
 
+```bash
 git clone https://github.com/alamin267/kinetik-Automation-Project.git
 cd kinetik-Automation-Project/src
 
@@ -50,8 +38,6 @@ pytest tests/test_CaseNo_1.py --env qa --mybrowser chromium --alluredir=reports/
 
 2. Run all tests in parallel:
 pytest -n auto --env qa --mybrowser chromium --alluredir=reports/allure-results
-
-
 -n auto will automatically use all available CPU cores.
 
 📊 Generating Allure Report
