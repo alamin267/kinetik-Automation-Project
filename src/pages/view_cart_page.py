@@ -16,8 +16,7 @@ class ViewCartPage:
     def check_view_cart_page_and_product_quantity(self, product_quantity):
         # Wait until the URL contains '/view_cart'
         self.wait.wait_for_url_contains(self.cart_page_url)
-
-        print("✅ User is on the View Cart page")
+        print("User is on the View Cart page")
 
         # Wait until the quantity button is visible
         self.wait.wait_for_element_visible(self.check_quantity)
@@ -25,7 +24,7 @@ class ViewCartPage:
         # Check quantity
         quantity_text = self.page.locator(self.check_quantity).inner_text().strip()
         if quantity_text == product_quantity:
-            print(f"✅ Quantity matches on View Cart page: {quantity_text}")
+            print(f"Quantity matches on View Cart page: {quantity_text}")
         else:
-            print(f"❌ Quantity does NOT match on View Cart page. Expected: {product_quantity}, Found: {quantity_text}")
+            print(f"Quantity does NOT match on View Cart page. Expected: {product_quantity}, Found: {quantity_text}")
             return

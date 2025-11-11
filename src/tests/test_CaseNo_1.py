@@ -20,5 +20,5 @@ def test_home_page(page, config):
     product_page.enter_product_name_and_search(search_term)
     product_page.is_searched_product_visible(search_term)
     product_page.all_the_search_related_product_are_visible()
-    time.sleep(5)
+
 

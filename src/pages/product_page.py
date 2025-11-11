@@ -15,7 +15,7 @@ class ProductsPage:
 
     def check_is_user_navigate_to_all_products_page(self):
         self.wait.wait_for_url_contains("/products")
-        print("✅ Navigated to All Products page successfully")
+        print("Navigated to All Products page successfully")
 
     def enter_product_name_and_search(self, search_item):
         self.wait.wait_and_fill(self.search_button_input_field, search_item)
@@ -28,13 +28,13 @@ class ProductsPage:
         searched_product = self.page.locator(self.products).nth(0)
         product_name = searched_product.locator("xpath=.//p").inner_text().strip()
         if search_item.lower() in product_name.lower():
-            print("✅ Search item is visible")
+            print("Search item is visible")
         else:
-            print("❌ Search item not found")
+            print("Search item not found")
 
     def all_the_search_related_product_are_visible(self):
         self.wait.wait_for_element_visible(self.products)
         count = self.page.locator(self.products).count()
         for i in range(count):
             expect(self.page.locator(self.products).nth(i)).to_be_visible()
-        print(f"✅ All search-related products are visible (Total: {count})")
+        print(f"All search-related products are visible (Total: {count})")

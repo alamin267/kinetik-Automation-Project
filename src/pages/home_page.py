@@ -1,6 +1,7 @@
 from helpers.wait_utils import WaitHelper
 from playwright.sync_api import expect
 
+
 class HomePage:
 
     def __init__(self, page, config):
@@ -21,9 +22,9 @@ class HomePage:
 
     def is_homePage_visible(self):
         if self.page.locator(self.home_page_logo).is_visible():
-            print("\n✅ Home page visible")
+            print("Home page visible")
         else:
-            print("❌ Home page NOT visible")
+            print("Home page NOT visible")
 
     def click_product_button(self):
         self.wait.wait_and_click(self.product_button)

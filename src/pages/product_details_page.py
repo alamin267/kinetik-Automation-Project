@@ -15,20 +15,20 @@ class ProductDetailPage:
 
     def is_product_detail_visible(self):
         self.wait.wait_for_element_visible(self.write_your_review_text)
-        print("✅ Product Details are visible")
+        print("Product Details are visible")
 
     def set_product_quantity_and_add_to_cart_product(self, quantity):
         self.wait.wait_and_fill(self.quantity_button, quantity)
         self.wait.wait_and_click(self.add_to_cart_button)
         self.wait.wait_and_click(self.view_cart_button)
-        print("✅ Product added to cart successfully")
+        print("Product added to cart successfully")
 
     def increase_product_quantity(self):
         self.wait.wait_for_element_visible(self.quantity_button)
         self.page.locator(self.quantity_button).click()
         for _ in range(3):
             self.page.locator(self.quantity_button).press("ArrowUp")
-        print("✅ Product quantity increased")
+        print("Product quantity increased")
 
     def addToCart_button_click(self):
         self.wait.wait_and_click(self.add_to_cart_button)
