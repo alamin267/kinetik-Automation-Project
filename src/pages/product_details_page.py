@@ -1,5 +1,6 @@
 from helpers.wait_utils import WaitHelper
 
+
 class ProductDetailPage:
 
     def __init__(self, page, config):

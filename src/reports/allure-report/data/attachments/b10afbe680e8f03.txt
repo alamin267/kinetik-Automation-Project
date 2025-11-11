@@ -1,0 +1,9 @@
+
+Home page visible
+View Product button is clicked
+Product Details are visible
+Product quantity increased
+Add to cart button clicked
+View cart button clicked
+User is on the View Cart page
+Quantity does NOT match on View Cart page. Expected: 5, Found: 4

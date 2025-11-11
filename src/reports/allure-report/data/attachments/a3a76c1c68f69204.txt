@@ -1,0 +1,7 @@
+
+Home page visible
+Clicked on the product button
+Navigated to All Products page successfully
+Entered product name and clicked on the search button
+Search item is visible
+All search-related products are visible (Total: 6)

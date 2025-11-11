@@ -1,6 +1,7 @@
 from playwright.sync_api import Page, expect, TimeoutError as PlaywrightTimeoutError
 import re
 
+
 class WaitHelper:
     def __init__(self, page: Page):
         self.page = page
@@ -17,7 +18,7 @@ class WaitHelper:
         except PlaywrightTimeoutError:
             return False
 
-    # Wait for element to be hidden
+    #Wait for element to be hidden
     def wait_for_element_hidden(self, selector: str, timeout: int = 15000):
         self.page.wait_for_selector(selector, state="hidden", timeout=timeout)
 
@@ -44,7 +45,7 @@ class WaitHelper:
         self.wait_for_element_visible(selector, timeout)
         self.page.locator(selector).fill(text)
 
-    # Robust page navigation helper
+    # # Robust page navigation helper
     def goto(self, url: str, timeout: int = 40000, wait_until: str = "networkidle"):
         self.page.goto(url, timeout=timeout, wait_until=wait_until)
         self.wait_for_page_load(timeout)

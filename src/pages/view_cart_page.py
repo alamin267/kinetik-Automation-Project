@@ -18,7 +18,6 @@ class ViewCartPage:
         self.wait.wait_for_url_contains(self.cart_page_url)
         print("User is on the View Cart page")
 
-        # Wait until the quantity button is visible
         self.wait.wait_for_element_visible(self.check_quantity)
 
         # Check quantity
